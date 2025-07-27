@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ECharts</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  </head>
+  <body>
+    <div id="main" style="width: 700px;height:400px;"></div>
+    <script type="text/javascript">
+      var myChart = echarts.init(document.getElementById('main'));
+
+      var chartDom = document.getElementById('main');
+      var myChart = echarts.init(chartDom);
+      var option;
+
+      option = {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            crossStyle: {
+              color: '#999'
+            }
+          }
+        },
+        toolbox: {
+          feature: {
+            dataView: { show: true, readOnly: false },
+            magicType: { show: true, type: ['line', 'bar'] },
+            restore: { show: true },
+            saveAsImage: { show: true }
+          }
+        },
+        legend: {
+          data: ['运营总里程', '总线路']
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+            axisPointer: {
+              type: 'shadow'
+            }
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value',
+            name: '运营总里程',
+            min: 3500,
+            max: 12500,
+            interval: 1800,
+            axisLabel: {
+              formatter: '{value} 公里'
+            }
+          },
+          {
+            type: 'value',
+            name: '总线路',
+            min: 100,
+            max: 400,
+            interval: 60,
+            axisLabel: {
+              formatter: '{value} 个'
+            }
+          }
+        ],
+        series: [
+          {
+            name: '运营总里程',
+            type: 'bar',
+            tooltip: {
+              valueFormatter: function (value) {
+                return value + ' 公里';
+              }
+            },
+            // Changed bar color here
+            itemStyle: {
+                color: '#dce9f5' // Light blue
+            },
+            data: [
+              3618, 4152.8, 5033, 5761.4, 6736.2, 7969.7, 9206.8, 10287.45, 11224.54, 12160.77,
+            ]
+          },
+          {
+            name: '总线路',
+            type: 'line',
+            yAxisIndex: 1,
+            tooltip: {
+              valueFormatter: function (value) {
+                return value + ' 个';
+              }
+            },
+            // Changed line color here
+            itemStyle: {
+                color: '#f5f5dc' // Beige
+            },
+            data: [116, 133, 165, 185, 208, 244, 283, 308, 338, 361, ]
+          }
+        ]
+      };
+
+      option && myChart.setOption(option);
+    </script>
+  </body>
+</html>
